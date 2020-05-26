@@ -1,0 +1,40 @@
+{
+  "webStoreApp": {
+    "storeServiceProduct": {
+      "home": {
+        "title": "Products",
+        "createLabel": "Product erstellen",
+        "createOrEditLabel": "Product erstellen oder bearbeiten",
+        "search": "Suche nach Product",
+        "notFound": "No Products found"
+      },
+      "delete": {
+        "question": "Soll Product {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "name": "Name",
+      "sku": "Sku",
+      "description": "Description",
+      "srp": "Srp",
+      "taxable": "Taxable",
+      "salesUnit": "Sales Unit",
+      "salesQuantity": "Sales Quantity",
+      "status": "Status",
+      "grosWeight": "Gros Weight",
+      "netWeight": "Net Weight",
+      "length": "Length",
+      "width": "Width",
+      "height": "Height",
+      "photos": "Photos"
+    }
+  },
+  "storeServiceApp": {
+    "storeServiceProduct": {
+      "created": "Product erstellt mit ID {{ param }}",
+      "updated": "Product aktualisiert mit ID {{ param }}",
+      "deleted": "Product gelöscht mit ID {{ param }}"
+    }
+  }
+}

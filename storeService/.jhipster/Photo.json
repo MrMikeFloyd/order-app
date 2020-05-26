@@ -1,0 +1,31 @@
+{
+  "name": "Photo",
+  "fields": [
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "photos",
+      "relationshipName": "product",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200526125401",
+  "entityTableName": "photo",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["webStore", "storeService"],
+  "microserviceName": "storeService"
+}

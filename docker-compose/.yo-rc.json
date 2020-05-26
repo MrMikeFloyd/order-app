@@ -1,0 +1,15 @@
+{
+  "generator-jhipster": {
+    "deploymentType": "docker-compose",
+    "gatewayType": "zuul",
+    "monitoring": "no",
+    "directoryPath": "../",
+    "appsFolders": ["storeService", "orderService", "webStore"],
+    "clusteredDbApps": [],
+    "consoleOptions": [],
+    "serviceDiscoveryType": "eureka",
+    "dockerRepositoryName": "maik",
+    "dockerPushCommand": "docker push",
+    "jwtSecretKey": "ODQyMGU5Mjc0YWMyODFmNTU4NGI1NTE1OTIxYWEzMzQ2MDJhM2E5MjJjYTI5OWJjNGIxYzgwY2I3YWRkNWY5YmVmZTljNTU0MGVjZTg5OTY5NjQwMGY0NmExZGI4OWYwN2IzYQ=="
+  }
+}

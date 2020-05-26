@@ -1,0 +1,83 @@
+{
+  "name": "Product",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "sku",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "6"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srp",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "taxable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "salesUnit",
+      "fieldType": "UnitOfMeasurement",
+      "fieldValues": "PIECE,KILOGRAM,GRAM,LITER"
+    },
+    {
+      "fieldName": "salesQuantity",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ProductStatus",
+      "fieldValues": "ONSALE,LOCKED,OUTOFSTOCK,INREPLENISHMENT"
+    },
+    {
+      "fieldName": "grosWeight",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "netWeight",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "length",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "width",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "photo",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "photos"
+    }
+  ],
+  "changelogDate": "20200526125301",
+  "entityTableName": "product",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["webStore", "storeService"],
+  "microserviceName": "storeService"
+}

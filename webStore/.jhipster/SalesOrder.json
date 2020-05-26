@@ -1,0 +1,54 @@
+{
+  "name": "SalesOrder",
+  "fields": [
+    {
+      "fieldName": "salesOrderNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "placed",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "cancelled",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "shipped",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "completed",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "SalesOrderStatus",
+      "fieldValues": "PENDING,CANCELLED,SHIPPED,COMPLETED"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "salesOrderItem",
+      "otherEntityRelationshipName": "salesOrder",
+      "relationshipName": "orderItems"
+    }
+  ],
+  "changelogDate": "20200526125101",
+  "entityTableName": "sales_order",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["webStore", "orderService"],
+  "microserviceName": "orderService"
+}

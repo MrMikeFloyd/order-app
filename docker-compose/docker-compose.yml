@@ -1,0 +1,110 @@
+version: '2'
+services:
+  storeservice:
+    image: storeservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://storeservice-mysql:3306/storeservice?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true'
+      - 'SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster'
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=internal
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=internal
+      - JHIPSTER_SLEEP=100
+      - 'SPRING_DATA_JEST_URI=http://storeservice-elasticsearch:9200'
+      - 'SPRING_ELASTICSEARCH_REST_URIS=http://storeservice-elasticsearch:9200'
+      - 'KAFKA_BOOTSTRAPSERVERS=kafka:9092'
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+  storeservice-mysql:
+    image: 'mysql:8.0.20'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=storeservice
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  storeservice-elasticsearch:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:6.8.8'
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node
+
+  orderservice:
+    image: orderservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://orderservice-mysql:3306/orderservice?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true'
+      - 'SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster'
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=internal
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=internal
+      - JHIPSTER_SLEEP=110
+      - 'SPRING_DATA_JEST_URI=http://orderservice-elasticsearch:9200'
+      - 'SPRING_ELASTICSEARCH_REST_URIS=http://orderservice-elasticsearch:9200'
+      - 'KAFKA_BOOTSTRAPSERVERS=kafka:9092'
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+  orderservice-mysql:
+    image: 'mysql:8.0.20'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=orderservice
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  orderservice-elasticsearch:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:6.8.8'
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node
+
+  webstore:
+    image: webstore
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://webstore-mysql:3306/webstore?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true'
+      - 'SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster'
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
+      - JHIPSTER_SLEEP=130
+      - 'SPRING_DATA_JEST_URI=http://webstore-elasticsearch:9200'
+      - 'SPRING_ELASTICSEARCH_REST_URIS=http://webstore-elasticsearch:9200'
+      - 'KAFKA_BOOTSTRAPSERVERS=kafka:9092'
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+    ports:
+      - '8080:9042'
+  webstore-mysql:
+    image: 'mysql:8.0.20'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=webstore
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  webstore-elasticsearch:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:6.8.8'
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node
+
+  zookeeper:
+    extends:
+      file: kafka.yml
+      service: zookeeper
+  kafka:
+    extends:
+      file: kafka.yml
+      service: kafka
+  jhipster-registry:
+    extends:
+      file: jhipster-registry.yml
+      service: jhipster-registry
+  keycloak:
+    extends:
+      file: keycloak.yml
+      service: keycloak

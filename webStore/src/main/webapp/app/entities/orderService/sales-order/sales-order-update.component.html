@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-sales-order-heading" jhiTranslate="webStoreApp.orderServiceSalesOrder.home.createOrEditLabel">Create or edit a Sales Order</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.salesOrderNumber" for="field_salesOrderNumber">Sales Order Number</label>
+                    <input type="text" class="form-control" name="salesOrderNumber" id="field_salesOrderNumber"
+                           formControlName="salesOrderNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.customerId" for="field_customerId">Customer Id</label>
+                    <input type="text" class="form-control" name="customerId" id="field_customerId"
+                           formControlName="customerId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.placed" for="field_placed">Placed</label>
+                    <div class="d-flex">
+                        <input id="field_placed" type="datetime-local" class="form-control" name="placed" formControlName="placed" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.cancelled" for="field_cancelled">Cancelled</label>
+                    <div class="d-flex">
+                        <input id="field_cancelled" type="datetime-local" class="form-control" name="cancelled" formControlName="cancelled" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.shipped" for="field_shipped">Shipped</label>
+                    <div class="d-flex">
+                        <input id="field_shipped" type="datetime-local" class="form-control" name="shipped" formControlName="shipped" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.completed" for="field_completed">Completed</label>
+                    <div class="d-flex">
+                        <input id="field_completed" type="datetime-local" class="form-control" name="completed" formControlName="completed" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="webStoreApp.orderServiceSalesOrder.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="PENDING">{{ 'webStoreApp.SalesOrderStatus.PENDING' | translate }}</option>
+                        <option value="CANCELLED">{{ 'webStoreApp.SalesOrderStatus.CANCELLED' | translate }}</option>
+                        <option value="SHIPPED">{{ 'webStoreApp.SalesOrderStatus.SHIPPED' | translate }}</option>
+                        <option value="COMPLETED">{{ 'webStoreApp.SalesOrderStatus.COMPLETED' | translate }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
