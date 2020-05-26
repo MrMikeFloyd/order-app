@@ -19,11 +19,19 @@ For this example, docker is used as a deployment target.
 
 ## How to build/run
 
+In order to run this example, you will need to have `docker` as well as `docker compose` installed on your machine.
+
 Run as follows:
 
 ```
 cd docker-compose
 docker-compose up -d
+```
+
+Wait for a bit, then navigate your browser to `http://localhost:8080`. You might need to add a host entry on your system to be able to navigate to your local keycloak instance for login:
+
+```
+echo "127.0.0.1	keycloak" >> /etc/hosts
 ```
 
 To build everything from scratch using the JDL:
